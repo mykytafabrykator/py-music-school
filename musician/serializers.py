@@ -14,3 +14,10 @@ class MusicianSerializer(serializers.ModelSerializer):
             "date_of_applying",
             "is_adult"
         )
+
+    def validate_age(self, value):
+        if value < 14:
+            raise serializers.ValidationError(
+                "Musician must be at least 14 years old"
+            )
+        return value
